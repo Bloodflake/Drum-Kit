@@ -3,9 +3,15 @@ var numberOfButton = document.querySelectorAll(".drum").length;
 for (var i = 0; i < 7; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function() {
     var key = this.innerHTML
+    buttonAnimation(key);
     playSound(key);
   });
 }
+
+document.addEventListener("keydown",function(event){
+  buttonAnimation(event.key);
+  playSound(event.key);
+});
 
 function playSound(key) {
   switch (key) {
@@ -38,6 +44,25 @@ function playSound(key) {
       audio.play();
       break;
     default:
+      // tempAlert("Wrong key", 5000);
 
   }
 }
+
+function buttonAnimation(key){
+  document.querySelector("."+key).classList.add("pressed");
+  setTimeout(function(){
+    document.querySelector("."+key).classList.remove("pressed");}
+    , 100);
+}
+
+// function tempAlert(msg,duration)
+// {
+//  var tempMsg = document.createElement("div");
+//  tempMsg.setAttribute("style","position:absolute;top:40%;left:20%;background-color:white;");
+//  tempMsg.innerHTML = msg;
+//  setTimeout(function(){
+//   tempMsg.parentNode.removeChild(tempMsg);
+//  },duration);
+//  document.body.appendChild(tempMsg);
+// }
